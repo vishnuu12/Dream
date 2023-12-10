@@ -1,0 +1,16 @@
+.card-style {
+    max-width: 650px;
+    margin: 35px auto;
+    width: 700px !important;
+  }
+
+.h-full {
+    height: 100%!important;
+}
+.card {
+    background: var(--surface-card);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 4px #0000001a, 0 24px 36px #0000000a;
+    border-radius: 14px;
+}

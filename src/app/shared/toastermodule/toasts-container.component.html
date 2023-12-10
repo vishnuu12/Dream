@@ -1,0 +1,22 @@
+<!-- <ngb-toast 
+  *ngFor="let toast of toastService.toasts" 
+  [class]="toast.classname" 
+  [autohide]="true" 
+  class="toaster-box"
+  style="z-index: 10000000 ;font-size: 14px;" 
+  [delay]="toast.delay || 5000" 
+  (hidden)="toastService.remove(toast)" 
+  (hidden)="close()">
+  <em class="{{toast.icon}}"></em>
+  <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">    
+    <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+  </ng-template>    
+  <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+  <span class="float-end toaster-hand" (click)="toastService.remove(toast)"><em class="fa-regular fa-xmark fa-beat-fade"></em></span>
+</ngb-toast> -->
+<div *ngIf="show">
+  <ngb-toast *ngFor="let toast of toastService.toasts" [header]="toast.type"
+    class="justify-content-center align-items-center" [class]="toast.classname" [autohide]="true" (hidden)="close()">
+    {{ toast.textOrTpl }}
+  </ngb-toast>
+</div>

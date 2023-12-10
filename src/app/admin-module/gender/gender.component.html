@@ -1,0 +1,182 @@
+<div class="table-responsive">
+  <p-table [columns]="cols" [value]="genderReport" #dt [paginator]="true" [rows]="10"
+    [globalFilterFields]="['fcid','fcgender','fcdescription']" responsiveLayout="scroll" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    responsiveLayout="scroll" [resizableColumns]="true" columnResizeMode="expand" [scrollable]="true"
+    scrollDirection="both">
+
+    <!-- Start Search and Excel Download -->
+    <ng-template pTemplate="caption">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+
+          <!-- Search input -->
+          <div class="d-flex" style="margin-left: auto;">
+            <!-- Add button -->
+            <div class="p-2">
+              <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Add"
+                (click)="showAddModal(genderRowData, genderDialogRef)">Add
+                <em class="fa-solid fa-add fa-lg"></em>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <!-- End Search and Excel Download -->
+
+    <!-- Table headers -->
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+
+        <th scope="col" *ngFor="let col of columns"
+          [ngStyle]="{'width': col.colwidth + 'px', 'min-width' : col.colwidth + 'px'}" pSortableColumn="{{col.field}}"
+          pResizableColumn pReorderableColumn pReorderableColumn class="table-heading" (mouseover)="onEvent($event)"
+          (mouseout)="onMouseout($event)" (click)="onClick($event)">
+          <span translate="{{col.translatelabel}}">{{col.header}}</span>
+          <p-sortIcon class="hide sortclass" field="{{col.field}}"></p-sortIcon>
+        </th>
+        <th alignFrozen="right" pFrozenColumn
+          style="width: 200px; background-color: whitesmoke !important; right: 0px;">Actions</th>
+      </tr>
+    </ng-template>
+
+    <!-- Table Body -->
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>{{rowData.id}}</td>
+        <td>{{rowData.gender}}</td>
+        <td>{{rowData.description}}</td>
+        <!-- Start Action -->
+        <td>
+          <button type="button" class="btn btn-primary btn-sm" ngbTooltip="Edit"
+            (click)="showEditModal(rowData, genderDialogRef)">Edit
+            <em class="fa-solid fa-edit fa-lg"></em>
+          </button>
+        </td>
+        <!-- End Action -->
+      </tr>
+    </ng-template>
+
+    <!-- Empty Message -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="20">
+          <span translate="No Data Found"></span>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>
+
+
+
+
+
+
+<ng-template #genderDialogRef let-modal>
+
+  <!-- Modal Header -->
+  <div class="modal-header justify-content-center">
+    <h3 class="text-primary page-title-text page-title">
+      <em class="fa fa-edit fa-lg me-2"></em><span>{{ modalType }}</span>
+    </h3>
+    <button type="button" class="btn-close" (click)="this.dialogRef?.close()" aria-hidden="true"></button>
+  </div>
+
+  <!-- Modal Content -->
+  <div class="modal-body justify-content-center">
+    <!-- Form start -->
+    <div>
+      <form [formGroup]="genderForm" autocomplete="off" class="form form-group form-label-right">
+
+      <div class="row">
+        <div class="col-6">
+          <div class="pb-8">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="id" formControlName="fcid" maxlength="15" ngbAutofocus placeholder="Enter ID"
+                [ngClass]="{'ng-dirty is-invalid': isControlInvalid('fcid', genderForm)}" />
+                <label for="id" class="text-weight">
+                  <span>Id </span>
+                </label>
+                <div class="invalid-feedback" *ngIf="controlHasError('required', 'fcid', genderForm)">
+                  Enter Id
+                </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-6">
+          <div class="pb-8">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="gender" formControlName="fcgender" maxlength="15" placeholder="Enter Gender"
+                [ngClass]="{'ng-dirty is-invalid': isControlInvalid('fcgender', genderForm)}" />
+              <label for="gender" class="text-weight">
+                <span>Gender <span class="text-danger">*</span></span>
+              </label>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'fcgender', genderForm)">
+                Enter Gender
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+      <div class="row">
+        <div class="col-6">
+          <div class="col-xl-12 col-lg-4 col-md-4 col-sm-6 col-12 pb-8">
+            <div class="form-floating">
+              <input style="height: 50px !important" type="text" class="form-control" id="lastname"
+                formControlName="fclastname" maxlength="15"
+                placeholder="Enter Last Name"
+                [ngClass]="{'ng-dirty is-invalid': isControlInvalid('fclastname',genderForm)}" />
+              <label for="floatingSelect" class="text-weight">
+                <span>Last Name </span>
+              </label>
+              <div class="invalid-feedback"
+                *ngIf="controlHasError('required', 'fclastname',genderForm)">
+                Enter Last Name
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="col-xl-12 col-lg-4 col-md-4 col-sm-6 col-12 pb-8">
+            <div class="form-floating">
+              <input style="height: 50px !important" type="text" class="form-control" id="mail"
+                formControlName="fcmail" placeholder="Enter Mail" 
+                [ngClass]="{'ng-dirty is-invalid': isControlInvalid('fcmail',genderForm)}" />
+              <label for="floatingSelect" class="text-weight">
+                <span>Mail Id <span class="text-danger">*</span></span>
+              </label>
+              <div class="invalid-feedback"
+                *ngIf="controlHasError('required', 'fcmail',genderForm)">
+                Enter Mail
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+    </form>
+    
+      <!-- Form end -->
+    </div>
+  </div>
+
+  <!-- Modal Footer -->
+  <div class="modal-footer justify-content-end">
+    <div>
+      <button type="button" class="btn btn-outline-danger me-2" (click)="this.dialogRef?.close()">
+        <em class="fa fa-times me-2"></em>
+        <span>Cancel</span>
+      </button>
+    </div>
+    <div style="margin-left: 10px;">
+      <button id="userSave" class="btn btn-primary" type="submit" (click)="save()">Save</button>
+    </div>
+  </div>
+</ng-template>

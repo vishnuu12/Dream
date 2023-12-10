@@ -1,0 +1,56 @@
+<!-- <div class="modal-header modal-dialog-centered">
+    <ng-container *ngIf="messageResponse.messagetype === 'Success Message'">
+        <h4 class="text-green text-center">{{messageResponse.messagetype}}</h4>
+
+        <button type="button" class="btn btn-outline-light btn-elevate mr-1" (click)="modal.close()">
+            <em class="fa-regular fa-xmark fa-lg text-green"></em>
+        </button>
+
+    </ng-container>
+
+    <ng-container *ngIf="messageResponse.messagetype === 'Error Message'">
+        <h4 class="text-danger text-center">{{messageResponse.messagetype}}</h4>
+
+        <button type="button" class="btn btn-outline-light btn-elevate mr-1" (click)="modal.close()">
+            <em class="fa-regular fa-xmark fa-lg text-danger"></em>
+        </button>
+
+    </ng-container>
+</div>
+<div class="modal-body">
+    <ng-container *ngIf="messageResponse.messagetype === 'Success Message'">
+        <h4 class="text-green"><em class="fa-regular fa-circle-check font-beat fa-xl me-2"></em>
+            {{messageResponse.errorcode}} - {{messageResponse.errordescription}}</h4>
+    </ng-container>
+
+    <ng-container *ngIf="messageResponse.messagetype === 'Error Message'">
+        <h4 class="text-danger"><em class="fa-regular fa-circle-xmark font-beat fa-xl me-2"></em>
+            {{messageResponse.errorcode}} - {{messageResponse.errordescription}}</h4>
+    </ng-container>
+</div> -->
+
+<!-- <ng-template > -->
+    <div class="modal-header  justify-content-start" *ngIf="messageResponse.messagetype === 'Success Message'">
+        <h3 class="modal-title font-size-14 headerline mt-0 text-green "><em class="fa-solid fa-check-double text-green"></em>&nbsp;{{messageResponse.messagetype}}</h3>
+        <!-- <button type="button" class="btn-close" (click)="modal.close()" aria-hidden="true"></button> -->
+
+    </div>
+    <div class="modal-header  justify-content-start" *ngIf="messageResponse.messagetype === 'Error Message'">
+        <h3 class="modal-title font-size-14 headerline mt-0 text-danger"><em class="fa fa-exclamation-triangle text-danger"></em>&nbsp;{{messageResponse.messagetype}}</h3>
+        <!-- <button type="button" class="btn-close" (click)="modal.close()" aria-hidden="true"></button> -->
+
+    </div>
+    <!-- <mat-divider></mat-divider> -->
+    <div class="modal-body  justify-content-start ">
+        <div class="container row " *ngIf="messageResponse.messagetype === 'Success Message'">
+            <span class=" fw-bold  d-flex justify-content-start ">{{messageResponse.errordescription}}</span>
+        </div>
+        <div class="container row " *ngIf="messageResponse.messagetype === 'Error Message'">
+            <span class="fw-bold d-flex justify-content-start ">{{messageResponse.errordescription}}</span>
+        </div>
+        
+    </div>
+    <div class="modal-footer justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="modal.close()">Ok</button>
+    </div>
+<!-- </ng-template> -->

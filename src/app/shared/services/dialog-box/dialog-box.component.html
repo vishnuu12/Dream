@@ -1,0 +1,27 @@
+
+  <div class="modal-header {{headerclass}}">
+    <div class="card-title">
+      <h3 class="card-label text-primary page-title page-title-text {{headerclass}}"><em
+              class="{{icon}} me-1 fa-lg me-1"></em>
+          <span>{{header}}</span>
+      </h3>
+  </div>
+    <!-- <em class="{{icon}} me-1 fa-lg "></em>&nbsp;{{header}} -->
+    <!-- <p class="m-0 {{hederclass}}" ><b>{{header}}</b></p> -->
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button> -->
+  </div>
+  <div class="modal-body">
+    <ng-container *ngTemplateOutlet="body">
+
+    </ng-container>
+    
+    <ng-container *ngIf="DIALOGBOXSERVICE.bodycontent; then bodystrting">
+    </ng-container>
+    <ng-template #bodystrting>
+      {{DIALOGBOXSERVICE.bodycontent}}
+    </ng-template>
+  </div>
+  <div class="modal-footer" *ngIf="showfooter">
+    <button class="btn btn-danger" *ngIf="cancel" (click)="dismiss()">Cancel</button>
+    <button class="btn btn-primary" (click)="okclick()">{{footer}}</button>
+  </div>
